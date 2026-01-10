@@ -482,29 +482,32 @@
          * This ensures sections AND cards have breathing room on small screens.
          */
         @media (max-width: 500px) {
-            .hero-grid {
-                display: flex;             /* Added to allow reordering */
-                flex-direction: column-reverse; /* Flips the order: Image becomes first */
-            }
-            .container {
-                padding: 0 1.5rem; /* Base side spacing */
-            }
-            /* ... keep all other existing lines below this exactly the same ... */
-            .hero, .section-padding {
-                padding-left: 1rem;
-                padding-right: 1rem;
-            }
-            .project-card, .info-card {
-                margin-left: 0.5rem;
-                margin-right: 0.5rem;
-            }
-            .hero-text h1 {
-                font-size: 2.2rem;
-            }
-            .social-dock {
-                gap: 1rem;
-            }
+        .hero-grid {
+            display: flex;
+            flex-direction: column-reverse; /* Keeps image on top */
+            padding-top: 80px; /* Pushes the entire content down so it's not under the navbar */
         }
+    
+        .profile-wrapper {
+            margin-top: 20px; /* Extra spacing specifically for the image */
+            margin-bottom: 2rem;
+            display: flex;
+            justify-content: center;
+        }
+    
+        .container {
+            padding: 0 1.5rem;
+        }
+    
+        .hero-text h1 {
+            font-size: 2.2rem;
+            text-align: center; /* Optional: centers text to match the centered image */
+        }
+    
+        .social-dock {
+            gap: 1rem;
+        }
+    }
 
         /* --- ADDED: NAVBAR TRANSPARENCY ---
          * Overrides the solid background with a transparent glass effect.
@@ -1410,33 +1413,48 @@
     
     feather.replace();
 
-    // --- PROFILE PICTURE HOVER LOGIC ---
+    // --- PROFILE PICTURE CLICK & HOVER LOGIC ---
     const profileImg = document.querySelector('.profile-img');
-    const originalSrc = "images\\profile.png"; 
-    const secondSrc = "images\\funny me.png"; 
+    const originalSrc = "C:\\Users\\Windows 11\\Pictures\\profile.png"; 
+    const secondSrc = "C:\\Users\\Windows 11\\Pictures\\funny me.png"; 
 
-    // Change to second image on hover
+    let isToggled = false; // Tracks if the image was clicked
+
+    // 1. CLICK LOGIC: Change and stay changed automatically
+    profileImg.addEventListener('click', () => {
+        isToggled = !isToggled;
+        profileImg.src = isToggled ? secondSrc : originalSrc;
+        
+        // Small animation to show it was clicked
+        profileImg.style.transform = "scale(0.95)";
+        setTimeout(() => {
+            profileImg.style.transform = isToggled ? "scale(1.05) rotate(2deg)" : "scale(1)";
+        }, 100);
+    });
+
+    // 2. HOVER LOGIC: Reverts ONLY if the user hasn't clicked it
     profileImg.addEventListener('mouseenter', () => {
-        profileImg.src = secondSrc;
+        if (!isToggled) profileImg.src = secondSrc;
     });
 
-    // Revert to original image when mouse leaves
     profileImg.addEventListener('mouseleave', () => {
-        profileImg.src = originalSrc;
+        if (!isToggled) profileImg.src = originalSrc;
     });
 
-    // --- ADDED: NEW SMOOTH SCROLL & FADE LOGIC ---
-    const revealElements = document.querySelectorAll('.reveal');
+    // --- RE-INITIALIZE ICONS (Ensures Debugging icon appears) ---
+    feather.replace();
 
+    // --- KEEP YOUR REVEAL OBSERVER LOGIC BELOW ---
+    const revealElements = document.querySelectorAll('.reveal');
     const revealObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('active');
             }
         });
-    }, {
-        threshold: 0.15 // Triggers when 15% of the element is visible
-    });
+    }, { threshold: 0.15 });
+
+    revealElements.forEach(el => revealObserver.observe(el));
 
     revealElements.forEach(el => revealObserver.observe(el));
 
