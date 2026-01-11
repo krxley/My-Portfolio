@@ -1497,5 +1497,128 @@
     document.addEventListener("DOMContentLoaded", typeEffect);
 </script>
 
+<div id="project-lightbox" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); z-index: 10001; justify-content: center; align-items: center; flex-direction: column; transition: all 0.4s ease;">
+    
+    <div style="position: absolute; top: 30px; left: 30px; z-index: 10002;">
+        <button onclick="closeLightbox()" class="btn btn-primary" style="display: flex; align-items: center; gap: 10px; text-decoration: none; border: 2px solid var(--text-main);">
+            <i data-feather="arrow-left"></i>
+            <span>Back to Projects</span>
+        </button>
+    </div>
+    
+    <img id="lightbox-img" src="" style="max-width: 85%; max-height: 80%; border-radius: 12px; border: 1px solid var(--border); box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25); object-fit: contain; transform: scale(0.8); opacity: 0; transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease;">
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const lightbox = document.getElementById('project-lightbox');
+    const lightboxImg = document.getElementById('lightbox-img');
+
+    // 1. Select images from BOTH Projects and Gallery
+    // Using '.gallery-content img' ensures we target the moving images
+    const images = document.querySelectorAll('.project-img, .gallery-content img');
+
+    images.forEach(img => {
+        img.style.cursor = 'zoom-in';
+        
+        img.addEventListener('click', (e) => {
+            // This allows the gallery to keep looping in the background 
+            // while we show the clicked image in the lightbox
+            lightboxImg.src = img.src;
+            lightbox.style.display = 'flex';
+            
+            // Trigger smooth zoom effect after display flex
+            setTimeout(() => {
+                lightboxImg.style.transform = 'scale(1)';
+                lightboxImg.style.opacity = '1';
+            }, 10);
+
+            document.body.style.overflow = 'hidden'; // Stop background page scroll
+            if(window.feather) feather.replace();
+        });
+    });
+
+    // Close function
+    window.closeLightbox = function() {
+        lightboxImg.style.transform = 'scale(0.8)';
+        lightboxImg.style.opacity = '0';
+        
+        setTimeout(() => {
+            lightbox.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }, 300);
+    };
+
+    // Close if background is clicked
+    lightbox.addEventListener('click', (e) => {
+        if (e.target === lightbox) closeLightbox();
+    });
+});
+</script>
+
+<div id="gallery-zoom-overlay" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(255, 255, 255, 0.75); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); z-index: 99999; justify-content: center; align-items: center; flex-direction: column; opacity: 0; transition: opacity 0.4s ease;">
+    
+    <div style="position: absolute; top: 30px; left: 30px; z-index: 100000;">
+        <button onclick="closeGalleryZoom()" class="btn btn-primary" style="display: flex; align-items: center; gap: 10px; border: 2px solid var(--text-main); cursor: pointer; text-decoration: none;">
+            <i data-feather="arrow-left"></i>
+            <span>Back to Gallery</span>
+        </button>
+    </div>
+    
+    <img id="zoomed-image-display" src="" style="max-width: 85%; max-height: 80%; border-radius: 12px; border: 1px solid var(--border); box-shadow: 0 25px 50px rgba(0,0,0,0.15); object-fit: contain; transform: scale(0.8); transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);">
+</div>
+
+<script>
+// --- GALLERY ZOOM LOGIC ---
+document.addEventListener('DOMContentLoaded', () => {
+    const overlay = document.getElementById('gallery-zoom-overlay');
+    const zoomImg = document.getElementById('zoomed-image-display');
+
+    // This specifically targets images inside your gallery track
+    const galleryTrack = document.querySelector('.gallery-track');
+
+    if (galleryTrack) {
+        galleryTrack.addEventListener('click', (e) => {
+            // Check if the clicked element is an image
+            if (e.target.tagName === 'IMG') {
+                const clickedImg = e.target;
+                
+                // Set source and show overlay
+                zoomImg.src = clickedImg.src;
+                overlay.style.display = 'flex';
+                
+                // Animate entrance
+                setTimeout(() => {
+                    overlay.style.opacity = '1';
+                    zoomImg.style.transform = 'scale(1)';
+                }, 10);
+
+                // Prevent background scrolling
+                document.body.style.overflow = 'hidden';
+                
+                // Refresh icons
+                if(window.feather) feather.replace();
+            }
+        });
+    }
+
+    // Function to close the zoom view
+    window.closeGalleryZoom = function() {
+        overlay.style.opacity = '0';
+        zoomImg.style.transform = 'scale(0.8)';
+        
+        setTimeout(() => {
+            overlay.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }, 400);
+    };
+
+    // Close when clicking the background
+    overlay.addEventListener('click', (e) => {
+        if (e.target === overlay) closeGalleryZoom();
+    });
+});
+</script>
+    
 </body>
 </html>
