@@ -1759,9 +1759,72 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 </script>
 
-<a href="https://m.me/krxley" target="_blank" class="messenger-float" title="Chat with me on Messenger">
-    <i class="fab fa-facebook-messenger"></i>
-</a>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const messengerBtn = document.getElementById('draggable-messenger');
+    let isDragging = false;
+    let offset = { x: 0, y: 0 };
+
+    const startDragging = (e) => {
+        isDragging = true;
+        messengerBtn.style.cursor = 'grabbing';
+        
+        // Get initial click/touch position relative to the button
+        const clientX = e.type === 'touchstart' ? e.touches[0].clientX : e.clientX;
+        const clientY = e.type === 'touchstart' ? e.touches[0].clientY : e.clientY;
+        
+        const rect = messengerBtn.getBoundingClientRect();
+        offset.x = clientX - rect.left;
+        offset.y = clientY - rect.top;
+    };
+
+    const drag = (e) => {
+        if (!isDragging) return;
+        e.preventDefault();
+
+        const clientX = e.type === 'touchmove' ? e.touches[0].clientX : e.clientX;
+        const clientY = e.type === 'touchmove' ? e.touches[0].clientY : e.clientY;
+
+        // Calculate new position
+        let newX = clientX - offset.x;
+        let newY = clientY - offset.y;
+
+        // Keep button within screen bounds
+        const maxX = window.innerWidth - messengerBtn.offsetWidth;
+        const maxY = window.innerHeight - messengerBtn.offsetHeight;
+
+        newX = Math.max(0, Math.min(newX, maxX));
+        newY = Math.max(0, Math.min(newY, maxY));
+
+        // Apply new position using fixed coordinates
+        messengerBtn.style.left = newX + 'px';
+        messengerBtn.style.top = newY + 'px';
+        messengerBtn.style.bottom = 'auto'; // Disable initial CSS bottom/right
+        messengerBtn.style.right = 'auto';
+    };
+
+    const stopDragging = () => {
+        isDragging = false;
+        messengerBtn.style.cursor = 'grab';
+    };
+
+    // Mouse Events
+    messengerBtn.addEventListener('mousedown', startDragging);
+    document.addEventListener('mousemove', drag);
+    document.addEventListener('mouseup', stopDragging);
+
+    // Touch Events (Mobile)
+    messengerBtn.addEventListener('touchstart', startDragging, { passive: false });
+    document.addEventListener('touchmove', drag, { passive: false });
+    document.addEventListener('touchend', stopDragging);
+});
+</script>
+
+<div class="messenger-float" id="draggable-messenger">
+    <a href="https://m.me/krxley" target="_blank" style="color: white; display: flex;">
+        <i class="fab fa-facebook-messenger"></i>
+    </a>
+</div>
     
 </body>
 </html>
