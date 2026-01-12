@@ -1039,13 +1039,30 @@
         /* --- PROJECT FILTER BUTTONS --- */
         .filter-container {
             display: flex;
-            justify-content: center;
-            gap: 1rem;
+            justify-content: center; /* This is the primary centering command */
+            align-items: center;
+            gap: 0.6rem;             /* Slightly reduced gap for better fit */
             margin-bottom: 3rem;
+            padding: 0 1rem;
+            width: 100%;
+            
+            /* Mobile Fixes */
+            flex-wrap: nowrap;       /* Keeps horizontal form */
+            overflow-x: auto;        /* Allows swipe if screen is tiny */
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;   /* Hides scrollbar Firefox */
         }
-
+        
+        /* Hides scrollbar Chrome/Safari */
+        .filter-container::-webkit-scrollbar {
+            display: none;
+        }
+        
         .filter-btn {
-            padding: 0.6rem 1.5rem;
+            /* Base Size for Desktop */
+            padding: 0.6rem 1.2rem;
+            font-size: 0.95rem;
+            
             border: 1px solid var(--border);
             background: var(--bg-card);
             color: var(--text-main);
@@ -1053,31 +1070,48 @@
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s ease;
-            display: flex; /* Added for icon alignment */
-            align-items: center; /* Added for icon alignment */
+            display: flex; 
+            align-items: center;
+            
+            /* THE "WHOLE" FIX */
+            white-space: nowrap;    /* Keeps text on one line */
+            flex-shrink: 0;         /* Prevents buttons from being squished */
         }
-
+        
+        /* --- THE MOBILE SCALE FIX --- */
+        /* This adjusts the button sizes specifically for mobile to ensure 
+           the whole group fits and centers perfectly without cutting off. */
+        @media (max-width: 480px) {
+            .filter-btn {
+                padding: 0.5rem 0.9rem; /* Smaller padding */
+                font-size: 0.8rem;      /* Smaller font to fit the width */
+            }
+            
+            .filter-container {
+                gap: 0.4rem;            /* Tighter gap to help centering */
+                justify-content: center; /* Forces center even on small screens */
+            }
+        }
+        
         .filter-btn.active, .filter-btn:hover {
             background: var(--text-main);
             color: var(--bg-body);
         }
-
-        /* Logic for Hiding/Showing Projects */
+        
+        /* --- Project Card Logic --- */
         .project-card.hide {
             display: none;
-            opacity: 0;
         }
-
-        /* Updated for buttery smooth fade-in */
+        
         .project-card {
             opacity: 1;
             transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 0.5s ease-in-out;
         }
-
+        
         .project-card.show-animate {
             animation: smoothFadeIn 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
         }
-
+        
         @keyframes smoothFadeIn {
             from {
                 opacity: 0;
