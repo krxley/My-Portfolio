@@ -1040,6 +1040,10 @@
 </head>
 <body>
 
+    <audio id="bg-music" loop>
+    <source src="audio\Kid Ink - Show Me (Official Lyric Video) ft. Chris Brown.mp3" type="audio/mpeg">
+    </audio>
+
     <div class="scroll-progress" id="progress-bar"></div>
 
     <nav class="navbar">
@@ -1061,6 +1065,10 @@
                     <li><a href="#contact">Contact</a></li>
                 </ul>
                 
+                <button class="theme-toggle" id="music-btn" aria-label="Toggle Music" style="margin-left: 1rem;">
+                    <i data-feather="play" id="music-icon"></i>
+                </button>
+
                 <button class="theme-toggle" id="theme-btn" aria-label="Toggle Dark Mode">
                     <i data-feather="moon"></i>
                 </button>
@@ -1817,6 +1825,59 @@ document.addEventListener('DOMContentLoaded', () => {
     messengerBtn.addEventListener('touchstart', startDragging, { passive: false });
     document.addEventListener('touchmove', drag, { passive: false });
     document.addEventListener('touchend', stopDragging);
+});
+</script>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const music = document.getElementById('bg-music');
+    const musicBtn = document.getElementById('music-btn');
+
+    function updateIcon(isPlaying) {
+        const currentIcon = musicBtn.querySelector('i, svg');
+        if (isPlaying) {
+            currentIcon.setAttribute('data-feather', 'pause');
+        } else {
+            currentIcon.setAttribute('data-feather', 'play');
+        }
+        if (typeof feather !== 'undefined') {
+            feather.replace();
+        }
+    }
+
+    // This function handles the "Force Autoplay"
+    function forcePlay() {
+        music.muted = false; // Unmute the audio
+        music.play().then(() => {
+            updateIcon(true);
+            // Once it starts playing, we stop listening for the first click
+            document.removeEventListener('click', forcePlay);
+            document.removeEventListener('touchstart', forcePlay);
+            document.removeEventListener('scroll', forcePlay);
+        }).catch((error) => {
+            console.log("Waiting for user interaction to start music...");
+        });
+    }
+
+    // 1. Try to play immediately (works in some browsers/settings)
+    forcePlay();
+
+    // 2. Listen for the FIRST interaction anywhere on the page to start music
+    document.addEventListener('click', forcePlay);
+    document.addEventListener('touchstart', forcePlay); // For Mobile
+    document.addEventListener('scroll', forcePlay);     // Even scrolling can trigger it
+
+    // 3. Manual Toggle Button Logic
+    musicBtn.addEventListener('click', (e) => {
+        e.stopPropagation(); // Prevents the global forcePlay from double-triggering
+        if (music.paused) {
+            music.play();
+            updateIcon(true);
+        } else {
+            music.pause();
+            updateIcon(false);
+        }
+    });
 });
 </script>
 
