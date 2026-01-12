@@ -1036,6 +1036,57 @@
             }
         }
 
+        /* --- PROJECT FILTER BUTTONS --- */
+        .filter-container {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 3rem;
+        }
+
+        .filter-btn {
+            padding: 0.6rem 1.5rem;
+            border: 1px solid var(--border);
+            background: var(--bg-card);
+            color: var(--text-main);
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .filter-btn.active, .filter-btn:hover {
+            background: var(--text-main);
+            color: var(--bg-body);
+        }
+
+        /* Logic for Hiding/Showing Projects */
+        .project-card.hide {
+            display: none;
+            opacity: 0;
+        }
+
+        /* Updated for buttery smooth fade-in */
+        .project-card {
+            opacity: 1;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 0.5s ease-in-out;
+        }
+
+        .project-card.show-animate {
+            animation: smoothFadeIn 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        }
+
+        @keyframes smoothFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
     </style>
 </head>
 <body>
@@ -1172,12 +1223,18 @@
 
     <section id="projects" class="section-padding container">
     <h2 class="section-title reveal">Recent Projects</h2>
+
+    <div class="filter-container reveal" style="display: flex; justify-content: center; gap: 1rem; margin-bottom: 3rem;">
+        <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="development">Development</button>
+        <button class="filter-btn" data-filter="design">Design</button>
+    </div>
     
     <div class="grid projects-grid">
         
-        <article class="project-card reveal delay-1">
+        <article class="project-card reveal delay-1" data-category="design">
             <div class="project-img-wrapper">
-                <img src="images/Portfolio Website karl.png" alt="Portfolio" class="project-img">
+                <img src="C:\Users\Windows 11\Pictures\Screenshots\Portfolio Website karl.png" alt="Portfolio" class="project-img">
             </div>
             <div class="project-content">
                 <h3>Personal Portfolio</h3>
@@ -1189,14 +1246,14 @@
                 </div>
                 <div class="project-links">
                     <a href="#" class="link-icon"><i data-feather="eye"></i> Website</a>
-                    <a href="https://github.com/krxley/My-Portfolio/blob/main/index.html" class="link-icon"><i data-feather="github"></i> Source Code</a>
+                    <a href="https://github.com/krxley/Group-2-Portfolio/blob/main/besa.html" class="link-icon"><i data-feather="github"></i> Source Code</a>
                 </div>
             </div>
         </article>
 
-        <article class="project-card reveal delay-2">
+        <article class="project-card reveal delay-2" data-category="development">
             <div class="project-img-wrapper">
-                <img src="images/Masawrap in a cup.png" alt="MasaWrap" class="project-img">
+                <img src="C:\Users\Windows 11\Pictures\Screenshots\Masawrap in a cup.png" alt="MasaWrap" class="project-img">
             </div>
             <div class="project-content">
                 <h3>MasaWrap In a Cup</h3>
@@ -1212,9 +1269,9 @@
             </div>
         </article>
 
-        <article class="project-card reveal delay-3">
+        <article class="project-card reveal delay-3" data-category="development">
             <div class="project-img-wrapper">
-                <img src="images/UEP Portal.png" alt="UEP Portal" class="project-img">
+                <img src="C:\Users\Windows 11\Pictures\Screenshots\UEP Portal.png" alt="UEP Portal" class="project-img">
             </div>
             <div class="project-content">
                 <h3>UEP Academic Portal</h3>
@@ -1230,9 +1287,9 @@
             </div>
         </article>
 
-        <article class="project-card reveal delay-1">
+        <article class="project-card reveal delay-1" data-category="design">
             <div class="project-img-wrapper">
-                <img src="images/Koffee.png" alt="Koffee" class="project-img">
+                <img src="C:\Users\Windows 11\Pictures\Koffee.png" alt="Koffee" class="project-img">
             </div>
             <div class="project-content">
                 <h3>Koffee Shop</h3>
@@ -1248,9 +1305,9 @@
             </div>
         </article>
 
-        <article class="project-card reveal delay-2">
+        <article class="project-card reveal delay-2" data-category="development">
             <div class="project-img-wrapper">
-                <img src="images/Omnifood.png" alt="Omnifood" class="project-img">
+                <img src="C:\Users\Windows 11\Pictures\Screenshots\Omnifood.png" alt="Omnifood" class="project-img">
             </div>
             <div class="project-content">
                 <h3>Omnifood AI</h3>
@@ -1266,9 +1323,9 @@
             </div>
         </article>
 
-        <article class="project-card reveal delay-3">
+        <article class="project-card reveal delay-3" data-category="design">
             <div class="project-img-wrapper">
-                <img src="images/barnbuddy-BE0q9pc5.png" alt="BarnBuddy" class="project-img">
+                <img src="C:\Users\Windows 11\Pictures\barnbuddy-BE0q9pc5.png" alt="BarnBuddy" class="project-img">
             </div>
             <div class="project-content">
                 <h3>BarnBuddy</h3>
@@ -1877,6 +1934,36 @@ document.addEventListener('DOMContentLoaded', () => {
             music.pause();
             updateIcon(false);
         }
+    });
+});
+
+    document.addEventListener('DOMContentLoaded', () => {
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const projects = document.querySelectorAll('.project-card');
+
+    filterBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            // Change active button
+            filterBtns.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+
+            const filter = btn.getAttribute('data-filter');
+
+            projects.forEach(project => {
+                // Reset animation class to allow re-triggering
+                project.classList.remove('show-animate');
+                
+                if (filter === 'all' || project.getAttribute('data-category') === filter) {
+                    project.classList.remove('hide');
+                    // Small timeout to ensure the browser registers the display change before animating
+                    setTimeout(() => {
+                        project.classList.add('show-animate');
+                    }, 10);
+                } else {
+                    project.classList.add('hide');
+                }
+            });
+        });
     });
 });
 </script>
