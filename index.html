@@ -12,7 +12,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <link rel="stylesheet" href="cdnjs.cloudflare.com">
-
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css">
+    <link rel="stylesheet" type='text/css' href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css" />
     
     <script src="https://unpkg.com/feather-icons"></script>
 
@@ -1123,6 +1124,33 @@
             }
         }
 
+        /* --- FRAMER BLUE ICON VISIBILITY FIX --- */
+
+        /* 1. Base State: Set Framer to Brand Blue */
+        .framer-tag i {
+            color: #00A0FF !important; /* Specific Framer Blue */
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        /* 2. Light Mode Hover: Since background turns black, we make the icon white/brighter */
+        .framer-tag:hover i {
+            filter: brightness(0) invert(1) !important; /* Turns it White for high contrast on Black hover */
+        }
+
+        /* 3. Dark Mode Fix: Keep it blue by default */
+        [data-theme="dark"] .framer-tag i {
+            color: #00A0FF !important;
+            filter: none;
+        }
+
+        /* 4. Dark Mode Hover: Since background turns white, we let the Blue stay or darken it */
+        [data-theme="dark"] .framer-tag:hover i {
+            filter: brightness(0.8) !important; /* Slightly darker blue to pop on white background */
+        }
+
     </style>
 </head>
 <body>
@@ -1171,7 +1199,7 @@
         <div class="grid hero-grid">
             <div class="hero-text reveal">
                 <p style="margin-bottom: 0.5rem; font-weight: 600; color: var(--primary);">Hello, I'm</p>
-                <h1>Karl Ashley Besa <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="width: 32px; height: 32px; vertical-align: middle; margin-left: 8px; display: inline-block;"><path d="M22.5 12.5c0-1.58-.88-2.95-2.18-3.66.54-1.27.43-2.71-.35-3.87-1.16-1.16-2.6-1.27-3.87-.35-.71-1.3-2.08-2.18-3.66-2.18s-2.95.88-3.66 2.18c-1.27-.54-2.71-.43-3.87.35-1.16 1.16-1.27 2.6-.35 3.87-1.3.71-2.18 2.08-2.18 3.66s.88 2.95 2.18 3.66c-.54 1.27-.43 2.71.35 3.87 1.16 1.16 2.6 1.27 3.87.35.71 1.3 2.08 2.18 3.66 2.18s2.95-.88 3.66-2.18c1.27.54 2.71.43 3.87-.35 1.16-1.16 1.27-2.6.35-3.87 1.3-.71 2.18-2.08 2.18-3.66z" fill="#1DA1F2"/><path d="M10.15 15.6l-3.35-3.35L8.23 10.8l1.92 1.92 4.98-4.98 1.43 1.43-6.41 6.43z" fill="white"/></svg></h1>
+                <h1>Karl Ashley Besa <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="width: 32px; height: 32px; vertical-align: middle; margin-left: 0.5px; display: inline-block;"><path d="M22.5 12.5c0-1.58-.88-2.95-2.18-3.66.54-1.27.43-2.71-.35-3.87-1.16-1.16-2.6-1.27-3.87-.35-.71-1.3-2.08-2.18-3.66-2.18s-2.95.88-3.66 2.18c-1.27-.54-2.71-.43-3.87.35-1.16 1.16-1.27 2.6-.35 3.87-1.3.71-2.18 2.08-2.18 3.66s.88 2.95 2.18 3.66c-.54 1.27-.43 2.71.35 3.87 1.16 1.16 2.6 1.27 3.87.35.71 1.3 2.08 2.18 3.66 2.18s2.95-.88 3.66-2.18c1.27.54 2.71.43 3.87-.35 1.16-1.16 1.27-2.6.35-3.87 1.3-.71 2.18-2.08 2.18-3.66z" fill="#1DA1F2"/><path d="M10.15 15.6l-3.35-3.35L8.23 10.8l1.92 1.92 4.98-4.98 1.43 1.43-6.41 6.43z" fill="white"/></svg></h1>
                 <h2><span id="typing-text"></span><span class="cursor">|</span></h2>
                 <p>I build accessible, pixel-perfect, and performant web experiences. Based in the Philippines, I combine technical depth with design aesthetics.</p>
                 
@@ -1234,14 +1262,20 @@
             <h3 class="reveal delay-1">Design & Development Tools</h3>
             <div class="skill-tags">
                 <span class="tag tech reveal delay-1"><i data-feather="figma" style="color: #F24E1E;"></i> Figma</span>
-                <span class="tag tech reveal delay-2"><i data-feather="image" style="color: #31A8FF;"></i> Adobe Photoshop</span>
-                <span class="tag tech reveal delay-3"><i data-feather="pen-tool" style="color: #F8B128;"></i> Sketch</span>
-                <span class="tag tech reveal delay-4"><i data-feather="layers" style="color: #00D2FF;"></i> Framer</span>
-                <span class="tag tech reveal delay-1"><i data-feather="code" style="color: #E34F26;"></i> HTML5 & CSS3</span>
-                <span class="tag tech reveal delay-2"><i data-feather="terminal" style="color: #F7DF1E;"></i> JavaScript</span>
-                <span class="tag tech reveal delay-3"><i data-feather="layout" style="color: #00C4CC;"></i> Canva</span>
-                <span class="tag tech reveal delay-1"><i data-feather="database" style="color: #00758f;"></i> MySQL</span>
-                <span class="tag tech reveal delay-2"><i data-feather="edit-3" style="color: #a855f7;"></i> Graphic Designing</span>
+                <span class="tag tech reveal delay-1"><i class="devicon-html5-plain colored"></i> HTML5</span>
+                <span class="tag tech reveal delay-1"><i class="devicon-css3-plain colored"></i> CSS3</span>
+                <span class="tag tech reveal delay-2"><i class="devicon-javascript-plain colored"></i> JavaScript</span>
+                <span class="tag tech reveal delay-2"><i class="devicon-python-plain colored"></i> Python</span>
+                <span class="tag tech reveal delay-3"><i class="devicon-cplusplus-plain colored"></i> C++</span>
+                <span class="tag tech reveal delay-4"><i class="devicon-react-original colored"></i> React</span>
+                <span class="tag tech reveal delay-4"><i class="devicon-bootstrap-plain colored"></i> Bootstrap</span>
+                <span class="tag tech reveal delay-1"><i class="devicon-mysql-plain colored"></i> MySQL</span>
+                <span class="tag tech reveal delay-3"><i class="devicon-blender-original colored"></i> Blender</span>
+                <span class="tag tech reveal delay-4 framer-tag"><i class="devicon-framermotion-original"></i> Framer</span>
+                <span class="tag tech reveal delay-2"><i class="devicon-photoshop-plain colored"></i> Adobe Photoshop</span>
+                <span class="tag tech reveal delay-3"><i class="devicon-sketch-plain colored"></i> Sketch</span>
+                <span class="tag tech reveal delay-3"><i class="devicon-canva-original colored"></i> Canva</span>
+                <span class="tag tech reveal delay-2"><i class="fa-solid fa-paintbrush" style="color: #a855f7;"></i> Graphic Designing</span>
             </div>
             
             <h3 class="reveal">Personal Attributes</h3>
@@ -1256,24 +1290,30 @@
         </div>
     </div>
 </section>
-
+    
     <section id="projects" class="section-padding container">
     <h2 class="section-title reveal">Recent Projects</h2>
 
     <div class="filter-container">
         <button class="filter-btn active" data-filter="all">
-            <i class="fas fa-layer-group" style="margin-right: 8px;"></i> All
+            <i class="fas fa-layer-group" style="margin-right: 6px; color: #4c1d95;"></i> All
         </button>
+        
         <button class="filter-btn" data-filter="development">
-            <i class="fas fa-code" style="margin-right: 8px;"></i> Development
+            <i class="fas fa-laptop-code" style="margin-right: 6px; color: #1e3a8a;"></i> Dev
         </button>
+        
         <button class="filter-btn" data-filter="design">
-            <i class="fas fa-palette" style="margin-right: 8px;"></i> Design
+            <i class="fas fa-palette" style="margin-right: 6px; color: #7f1d1d;"></i> Design
+        </button>
+        
+        <button class="filter-btn" data-filter="ui-design">
+            <i class="fas fa-wand-magic-sparkles" style="margin-right: 6px; color: #854d0e;"></i> UI
         </button>
     </div>
     
     <div class="grid projects-grid">
-        
+
         <article class="project-card reveal delay-1" data-category="design">
             <div class="project-img-wrapper">
                 <img src="images\Portfolio Website karl.png" alt="Portfolio" class="project-img">
@@ -1282,13 +1322,13 @@
                 <h3>Personal Portfolio</h3>
                 <p>A user-centered portfolio highlighting design expertise. Focuses on visual hierarchy and smooth interactions.</p>
                 <div class="skill-tags" style="margin-top: auto; margin-bottom: 1.5rem; gap: 0.5rem;">
-                    <span class="tag" style="font-size: 0.75rem; padding: 0.3rem 0.8rem;"><i data-feather="code" style="color: #E34F26;"></i> HTML5</span>
-                    <span class="tag" style="font-size: 0.75rem; padding: 0.3rem 0.8rem;"><i data-feather="layers" style="color: #1572B6;"></i> CSS3</span>
-                    <span class="tag" style="font-size: 0.75rem; padding: 0.3rem 0.8rem;"><i data-feather="terminal" style="color: #F7DF1E;"></i> JS</span>
+                    <span class="tag" style="font-size: 0.75rem; padding: 0.3rem 0.8rem;"><i class="devicon-html5-plain colored" style="font-size: 1.1rem; vertical-align: middle;"></i> HTML5</span>
+                    <span class="tag" style="font-size: 0.75rem; padding: 0.3rem 0.8rem;"><i class="devicon-css3-plain colored" style="font-size: 1.1rem; vertical-align: middle;"></i> CSS3</span>
+                    <span class="tag" style="font-size: 0.75rem; padding: 0.3rem 0.8rem;"><i class="devicon-javascript-plain colored" style="font-size: 1.1rem; vertical-align: middle;"></i> JS</span>
                 </div>
                 <div class="project-links">
-                    <a href="#" class="link-icon"><i data-feather="eye"></i> Website</a>
-                    <a href="https://github.com/krxley/My-Portfolio/blob/main/index.html" class="link-icon"><i data-feather="github"></i> Source Code</a>
+                    <a href="#" class="link-icon"><i data-feather="external-link"></i> Website</a>
+                    <a href="https://github.com/krxley/Group-2-Portfolio/blob/main/besa.html" class="link-icon"><i data-feather="github"></i> Source Code</a>
                 </div>
             </div>
         </article>
@@ -1301,11 +1341,11 @@
                 <h3>MasaWrap In a Cup</h3>
                 <p>A responsive landing page for a fast-casual Filipino concept. Fully responsive design built with vanilla JS.</p>
                 <div class="skill-tags" style="margin-top: auto; margin-bottom: 1.5rem; gap: 0.5rem;">
-                    <span class="tag" style="font-size: 0.75rem; padding: 0.3rem 0.8rem;"><i data-feather="terminal" style="color: #F7DF1E;"></i> JavaScript</span>
-                    <span class="tag" style="font-size: 0.75rem; padding: 0.3rem 0.8rem;"><i data-feather="code" style="color: #E34F26;"></i> HTML5</span>
+                    <span class="tag" style="font-size: 0.75rem; padding: 0.3rem 0.8rem;"><i class="devicon-javascript-plain colored" style="font-size: 1.1rem; vertical-align: middle;"></i> JavaScript</span>
+                    <span class="tag" style="font-size: 0.75rem; padding: 0.3rem 0.8rem;"><i class="devicon-html5-plain colored" style="font-size: 1.1rem; vertical-align: middle;"></i> HTML5</span>
                 </div>
                 <div class="project-links">
-                    <a href="https://krxley.github.io/MasaWrap/" class="link-icon"><i data-feather="eye"></i> Website</a>
+                    <a href="https://krxley.github.io/MasaWrap/" class="link-icon"><i data-feather="external-link"></i> Website</a>
                     <a href="https://github.com/krxley/MasaWrap/blob/main/index.html" class="link-icon"><i data-feather="github"></i> Source Code</a>
                 </div>
             </div>
@@ -1319,11 +1359,11 @@
                 <h3>UEP Academic Portal</h3>
                 <p>Academic portal for students and faculty. Features seamless access to grades and resources.</p>
                 <div class="skill-tags" style="margin-top: auto; margin-bottom: 1.5rem; gap: 0.5rem;">
-                    <span class="tag" style="font-size: 0.75rem; padding: 0.3rem 0.8rem;"><i data-feather="layout" style="color: #4CAF50;"></i> UI Design</span>
-                    <span class="tag" style="font-size: 0.75rem; padding: 0.3rem 0.8rem;"><i data-feather="code" style="color: #2563eb;"></i> Web Dev</span>
+                    <span class="tag" style="font-size: 0.75rem; padding: 0.3rem 0.8rem;"><i class="fa-solid fa-paintbrush" style="color: #a855f7; font-size: 1.1rem; vertical-align: middle;"></i> UI Design</span>
+                    <span class="tag" style="font-size: 0.75rem; padding: 0.3rem 0.8rem;"><i class="devicon-html5-plain colored" style="font-size: 1.1rem; vertical-align: middle;"></i> Web Dev</span>
                 </div>
                 <div class="project-links">
-                    <a href="https://krxley.github.io/UEP-Portal/" class="link-icon"><i data-feather="eye"></i> Website</a>
+                    <a href="https://krxley.github.io/UEP-Portal/" class="link-icon"><i data-feather="external-link"></i> Website</a>
                     <a href="https://github.com/krxley/UEP-Portal/blob/main/index.html" class="link-icon"><i data-feather="github"></i> Source Code</a>
                 </div>
             </div>
@@ -1337,11 +1377,11 @@
                 <h3>Koffee Shop</h3>
                 <p>A warm, modern landing page for a specialty coffee shop. Highlights artisanal blends and heritage.</p>
                 <div class="skill-tags" style="margin-top: auto; margin-bottom: 1.5rem; gap: 0.5rem;">
-                    <span class="tag" style="font-size: 0.75rem; padding: 0.3rem 0.8rem;"><i data-feather="image" style="color: #31A8FF;"></i> Photoshop</span>
+                    <span class="tag" style="font-size: 0.75rem; padding: 0.3rem 0.8rem;"><i class="devicon-photoshop-plain colored" style="font-size: 1.1rem; vertical-align: middle;"></i> Photoshop</span>
                     <span class="tag" style="font-size: 0.75rem; padding: 0.3rem 0.8rem;"><i data-feather="figma" style="color: #F24E1E;"></i> Figma</span>
                 </div>
                 <div class="project-links">
-                    <a href="https://krxley.github.io/Koffee/" class="link-icon"><i data-feather="eye"></i> Website</a>
+                    <a href="https://krxley.github.io/Koffee/" class="link-icon"><i data-feather="external-link"></i> Website</a>
                     <a href="https://github.com/krxley/Koffee/blob/main/index.html" class="link-icon"><i data-feather="github"></i> Source Code</a>
                 </div>
             </div>
@@ -1355,11 +1395,11 @@
                 <h3>Omnifood AI</h3>
                 <p>High-conversion landing page for an AI meal planning startup. Implements modern UI/UX principles.</p>
                 <div class="skill-tags" style="margin-top: auto; margin-bottom: 1.5rem; gap: 0.5rem;">
-                    <span class="tag" style="font-size: 0.75rem; padding: 0.3rem 0.8rem;"><i data-feather="zap" style="color: #FFD700;"></i> AI Tools</span>
-                    <span class="tag" style="font-size: 0.75rem; padding: 0.3rem 0.8rem;"><i data-feather="layers" style="color: #1572B6;"></i> CSS3</span>
+                    <span class="tag" style="font-size: 0.75rem; padding: 0.3rem 0.8rem;"><i class="fas fa-robot" style="color: #FFD700; font-size: 1.1rem; vertical-align: middle;"></i> AI Tools</span>
+                    <span class="tag" style="font-size: 0.75rem; padding: 0.3rem 0.8rem;"><i class="devicon-css3-plain colored" style="font-size: 1.1rem; vertical-align: middle;"></i> CSS3</span>
                 </div>
                 <div class="project-links">
-                    <a href="https://krxley.github.io/Omnifood/" class="link-icon"><i data-feather="eye"></i> Website</a>
+                    <a href="https://krxley.github.io/Omnifood/" class="link-icon"><i data-feather="external-link"></i> Website</a>
                     <a href="https://github.com/krxley/Omnifood/blob/main/index.html" class="link-icon"><i data-feather="github"></i> Source Code</a>
                 </div>
             </div>
@@ -1373,13 +1413,41 @@
                 <h3>BarnBuddy</h3>
                 <p>Farm management web app for livestock data. Cloud-based dashboard replacing traditional paper logs.</p>
                 <div class="skill-tags" style="margin-top: auto; margin-bottom: 1.5rem; gap: 0.5rem;">
-                    <span class="tag" style="font-size: 0.75rem; padding: 0.3rem 0.8rem;"><i data-feather="database" style="color: #008080;"></i> Cloud</span>
-                    <span class="tag" style="font-size: 0.75rem; padding: 0.3rem 0.8rem;"><i data-feather="monitor" style="color: #555555;"></i> Dashboard</span>
+                    <span class="tag" style="font-size: 0.75rem; padding: 0.3rem 0.8rem;">
+                        <i class="fas fa-cloud-sun" style="color: #0d9488; font-size: 1.1rem; vertical-align: middle;"></i> Cloud
+                    </span>
+                    <span class="tag" style="font-size: 0.75rem; padding: 0.3rem 0.8rem;">
+                        <i class="fas fa-table-columns" style="color: #334155; font-size: 1.1rem; vertical-align: middle;"></i> Dashboard
+                    </span>
                 </div>
                 <div class="project-links">
-                    <a href="https://barnbuddy.netlify.app/" class="link-icon"><i data-feather="eye"></i> Website</a>
+                    <a href="https://barnbuddy.netlify.app/" class="link-icon"><i data-feather="external-link"></i> Website</a>
                     <a href="https://github.com/krxley/BarnBuddy-Website/blob/main/index.html" class="link-icon"><i data-feather="github"></i> Source Code</a>
                 </div>
+            </div>
+        </article>
+
+        <article class="project-card reveal delay-1" data-category="ui-design">
+            <div class="project-img-wrapper" style="margin-bottom: 0;">
+                <img src="images\Desktop - 1.png" alt="UI Design Showcase" class="project-img" style="border-radius: 12px;">
+            </div>
+        </article>
+
+        <article class="project-card reveal delay-2" data-category="ui-design">
+            <div class="project-img-wrapper" style="margin-bottom: 0;">
+                <img src="images\Desktop - 2.png" alt="UI Design Showcase" class="project-img" style="border-radius: 12px;">
+            </div>
+        </article>
+
+        <article class="project-card reveal delay-1" data-category="ui-design">
+            <div class="project-img-wrapper" style="margin-bottom: 0;">
+                <img src="images\Desktop - 4.png" alt="UI Design Showcase" class="project-img" style="border-radius: 12px;">
+            </div>
+        </article>
+
+        <article class="project-card reveal delay-2" data-category="ui-design">
+            <div class="project-img-wrapper" style="margin-bottom: 0;">
+                <img src="images\Desktop - 3.png" alt="UI Design Showcase" class="project-img" style="border-radius: 12px;">
             </div>
         </article>
 
