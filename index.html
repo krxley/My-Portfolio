@@ -1153,6 +1153,52 @@
             filter: brightness(0.8) !important; /* Slightly darker blue to pop on white background */
         }
 
+        /* --- Unified Skill & Attribute Hover Effect --- */
+        .tag.tech {
+            position: relative;
+            overflow: hidden;
+            /* Smooth padding transition to make room for the percentage */
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), padding 0.4s ease !important;
+        }
+        
+        /* The Percentage Text */
+        .tag.tech::after {
+            content: attr(data-progress);
+            position: absolute;
+            right: 1.2rem;
+            font-weight: 800;
+            font-size: 0.8rem;
+            opacity: 0;
+            transform: translateX(10px);
+            transition: all 0.4s ease;
+        }
+        
+        /* The Progress Bar at the bottom */
+        .tag.tech::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            height: 3px;
+            width: 0%;
+            background: var(--bg-body); /* Automatically adapts to your light/dark theme toggle */
+            transition: width 0.6s cubic-bezier(0.25, 1, 0.5, 1) 0.1s;
+        }
+        
+        /* Hover States */
+        .tag.tech:hover {
+            padding-right: 4.5rem !important;
+        }
+        
+        .tag.tech:hover::after {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        
+        .tag.tech:hover::before {
+            width: var(--prog);
+        }
+
     </style>
 </head>
 <body>
@@ -1263,62 +1309,73 @@
         <div class="skills-wrapper">
             <h3 class="reveal delay-1">Design & Development Tools</h3>
             <div class="skill-tags">
-                <span class="tag tech reveal delay-1">
+                <span class="tag tech reveal delay-1" data-progress="90%" style="--prog: 90%;">
                     <i data-feather="figma" style="color: #F24E1E; width: 1.4rem; height: 1.4rem; vertical-align: middle;"></i> Figma
                 </span>
-
-                <span class="tag tech reveal delay-1">
+                <span class="tag tech reveal delay-1" data-progress="95%" style="--prog: 95%;">
                     <i class="devicon-html5-plain colored" style="font-size: 1.2rem; vertical-align: middle;"></i> HTML5
                 </span>
-                <span class="tag tech reveal delay-1">
+                <span class="tag tech reveal delay-1" data-progress="92%" style="--prog: 92%;">
                     <i class="devicon-css3-plain colored" style="font-size: 1.2rem; vertical-align: middle;"></i> CSS3
                 </span>
-                <span class="tag tech reveal delay-2">
+                <span class="tag tech reveal delay-2" data-progress="85%" style="--prog: 85%;">
                     <i class="devicon-javascript-plain colored" style="font-size: 1.2rem; vertical-align: middle;"></i> JavaScript
                 </span>
-                <span class="tag tech reveal delay-2">
+                <span class="tag tech reveal delay-2" data-progress="75%" style="--prog: 75%;">
                     <i class="devicon-python-plain colored" style="font-size: 1.2rem; vertical-align: middle;"></i> Python
                 </span>
-                <span class="tag tech reveal delay-3">
+                <span class="tag tech reveal delay-3" data-progress="70%" style="--prog: 70%;">
                     <i class="devicon-cplusplus-plain colored" style="font-size: 1.2rem; vertical-align: middle;"></i> C++
                 </span>
-                <span class="tag tech reveal delay-4">
+                <span class="tag tech reveal delay-4" data-progress="65%" style="--prog: 65%;">
                     <i class="devicon-react-original colored" style="font-size: 1.2rem; vertical-align: middle;"></i> React
                 </span>
-                <span class="tag tech reveal delay-4">
+                <span class="tag tech reveal delay-4" data-progress="88%" style="--prog: 88%;">
                     <i class="devicon-bootstrap-plain colored" style="font-size: 1.2rem; vertical-align: middle;"></i> Bootstrap
                 </span>
-                <span class="tag tech reveal delay-1">
+                <span class="tag tech reveal delay-1" data-progress="80%" style="--prog: 80%;">
                     <i class="devicon-mysql-plain colored" style="font-size: 1.2rem; vertical-align: middle;"></i> MySQL
                 </span>
-                <span class="tag tech reveal delay-3">
+                <span class="tag tech reveal delay-3" data-progress="60%" style="--prog: 60%;">
                     <i class="devicon-blender-original colored" style="font-size: 1.2rem; vertical-align: middle;"></i> Blender
                 </span>
-                <span class="tag tech reveal delay-4 framer-tag">
+                <span class="tag tech reveal delay-4 framer-tag" data-progress="70%" style="--prog: 70%;">
                     <i class="devicon-framermotion-original" style="font-size: 1.2rem; vertical-align: middle;"></i> Framer
                 </span>
-                <span class="tag tech reveal delay-2">
+                <span class="tag tech reveal delay-2" data-progress="85%" style="--prog: 85%;">
                     <i class="devicon-photoshop-plain colored" style="font-size: 1.2rem; vertical-align: middle;"></i> Adobe Photoshop
                 </span>
-                <span class="tag tech reveal delay-3">
+                <span class="tag tech reveal delay-3" data-progress="65%" style="--prog: 65%;">
                     <i class="devicon-sketch-plain colored" style="font-size: 1.2rem; vertical-align: middle;"></i> Sketch
                 </span>
-                <span class="tag tech reveal delay-3">
+                <span class="tag tech reveal delay-3" data-progress="90%" style="--prog: 90%;">
                     <i class="devicon-canva-original colored" style="font-size: 1.2rem; vertical-align: middle;"></i> Canva
                 </span>
-                <span class="tag tech reveal delay-2">
+                <span class="tag tech reveal delay-2" data-progress="88%" style="--prog: 88%;">
                     <i class="fa-solid fa-paintbrush" style="color: #a855f7; font-size: 1.1rem; vertical-align: middle;"></i> Graphic Designing
                 </span>
             </div>
             
             <h3 class="reveal">Personal Attributes</h3>
             <div class="skill-tags">
-                <span class="tag reveal delay-1"><i data-feather="headphones" style="color: #6366f1;"></i> Active Listener</span>
-                <span class="tag reveal delay-2"><i data-feather="search" style="color: #10b981;"></i> Detail Oriented</span>
-                <span class="tag reveal delay-3"><i data-feather="zap" style="color: #f59e0b;"></i> Problem-Solving</span>
-                <span class="tag reveal delay-4"><i data-feather="users" style="color: #ec4899;"></i> Team Collaboration</span>
-                <span class="tag reveal delay-1"><i data-feather="refresh-cw" style="color: #06b6d4;"></i> Adaptable</span>
-                <span class="tag reveal delay-2"><i class="fas fa-bug" style="color: #ef4444;"></i> Debugging</span>
+                <span class="tag tech reveal delay-1" data-progress="95%" style="--prog: 95%;">
+                    <i data-feather="headphones" style="color: #6366f1;"></i> Active Listener
+                </span>
+                <span class="tag tech reveal delay-2" data-progress="90%" style="--prog: 90%;">
+                    <i data-feather="search" style="color: #10b981;"></i> Detail Oriented
+                </span>
+                <span class="tag tech reveal delay-3" data-progress="85%" style="--prog: 85%;">
+                    <i data-feather="zap" style="color: #f59e0b;"></i> Problem-Solving
+                </span>
+                <span class="tag tech reveal delay-4" data-progress="92%" style="--prog: 92%;">
+                    <i data-feather="users" style="color: #ec4899;"></i> Team Collaboration
+                </span>
+                <span class="tag tech reveal delay-1" data-progress="98%" style="--prog: 98%;">
+                    <i data-feather="refresh-cw" style="color: #06b6d4;"></i> Adaptable
+                </span>
+                <span class="tag tech reveal delay-2" data-progress="80%" style="--prog: 80%;">
+                    <i class="fas fa-bug" style="color: #ef4444;"></i> Debugging
+                </span>
             </div>
         </div>
     </div>
