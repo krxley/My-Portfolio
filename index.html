@@ -1199,6 +1199,24 @@
             width: var(--prog);
         }
 
+        /* University Link Highlight */
+        .uni-link {
+            color: inherit;
+            font-weight: 700;
+            position: relative;
+            text-decoration: none;
+            background-image: linear-gradient(currentColor, currentColor);
+            background-size: 0% 2px;
+            background-repeat: no-repeat;
+            background-position: left bottom;
+            transition: background-size 0.3s ease, color 0.2s ease;
+            padding-bottom: 1px;
+        }
+        .uni-link:hover {
+            color: var(--primary);
+            background-size: 100% 2px;
+        }
+
     </style>
 </head>
 <body>
@@ -1275,31 +1293,32 @@
     
     <section id="about" class="section-padding container">
         <h2 class="section-title reveal">About</h2>
-        
+    
         <div class="grid about-grid">
             <div class="reveal delay-1">
                 <p style="margin-bottom: 1.5rem; color: var(--text-muted);">
-                    I am an aspiring UI/UX designer and developer passionate about creating intuitive digital experiences. Currently pursuing a Bachelor of Science in Information Technology at the University of Eastern Pangasinan.
+                    I am an aspiring UI/UX designer and developer passionate about creating intuitive digital experiences. Currently pursuing a Bachelor of Science in Information Technology at the
+                    <a href="https://www.facebook.com/universityofeasternpangasinan" target="_blank" rel="noopener noreferrer" class="uni-link">University of Eastern Pangasinan</a>.
                 </p>
                 <p style="color: var(--text-muted);">
                     My approach blends creative design with logical problem solving. I enjoy exploring modern design trends and translating them into user-friendly interfaces.
                 </p>
             </div>
-
+    
             <div class="info-card reveal delay-2">
-    <div class="info-item">
-        <strong><i class="fa-solid fa-location-dot" style="margin-right: 8px;"></i> Location</strong>
-        <span>Villasis, Pangasinan, Philippines</span>
-    </div>
-    <div class="info-item">
-        <strong><i class="fa-solid fa-graduation-cap" style="margin-right: 8px;"></i> Education</strong>
-        <span>BS Information Technology (2024 - Present)</span>
-    </div>
-    <div class="info-item">
-        <strong><i class="fa-solid fa-heart" style="margin-right: 8px;"></i> Interests</strong>
-        <span>UI/UX, Web Development, Mobile Design</span>
-    </div>
-</div>
+                <div class="info-item">
+                    <strong><i class="fa-solid fa-location-dot" style="margin-right: 8px;"></i> Location</strong>
+                    <span>Villasis, Pangasinan, Philippines</span>
+                </div>
+                <div class="info-item">
+                    <strong><i class="fa-solid fa-graduation-cap" style="margin-right: 8px;"></i> Education</strong>
+                    <span>BS Information Technology (2024 - Present)</span>
+                </div>
+                <div class="info-item">
+                    <strong><i class="fa-solid fa-heart" style="margin-right: 8px;"></i> Interests</strong>
+                    <span>UI/UX, Web Development, Mobile Design</span>
+                </div>
+            </div>
         </div>
     </section>
 
